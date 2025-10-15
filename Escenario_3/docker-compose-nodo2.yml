@@ -1,0 +1,37 @@
+version: '3.8'
+services:
+  productor-node:
+    build: ../Productores/productor-node
+    container_name: productor-node
+    environment:
+      - RABBITMQ_HOST=192.168.0.103
+    networks:
+      - taller_net
+
+  consumidor-node:
+    build: ../Consumidores/consumidor-node
+    container_name: consumidor-node
+    environment:
+      - RABBITMQ_HOST=192.168.0.103
+    networks:
+      - taller_net
+
+  productor-go:
+    build: ../Productores/productor-Go
+    container_name: productor-go
+    environment:
+      - RABBITMQ_HOST=192.168.0.103
+    networks:
+      - taller_net
+
+  consumidor-go:
+    build: ../Consumidores/consumidor-Go
+    container_name: consumidor-go
+    environment:
+      - RABBITMQ_HOST=192.168.0.103
+    networks:
+      - taller_net
+
+networks:
+  taller_net:
+    driver: bridge

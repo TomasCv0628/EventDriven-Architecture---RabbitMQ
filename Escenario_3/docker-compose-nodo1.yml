@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  productor-python:
+    build: ../Productores/productor-python
+    container_name: productor-python
+    environment:
+      - RABBITMQ_HOST=192.168.0.103
+    networks:
+      - taller_net
+
+  consumidor-python:
+    build: ../Consumidores/consumidor-python
+    container_name: consumidor-python
+    environment:
+      - RABBITMQ_HOST=192.168.0.103
+    networks:
+      - taller_net
+
+networks:
+  taller_net:
+    driver: bridge
