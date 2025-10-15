@@ -1,0 +1,71 @@
+version: '3.8'
+
+services:
+  productor-python:
+    build: ../Productores/productor-python
+    container_name: productor-python
+    environment:
+      - RABBIT_HOST=10.6.101.161
+      - RABBITMQ_PORT=5672
+      - RABBITMQ_USER=user
+      - RABBITMQ_PASS=password
+    networks:
+      - taller_net
+
+  productor-node:
+    build: ../Productores/productor-node
+    container_name: productor-node
+    environment:
+      - RABBIT_HOST=10.6.101.161
+      - RABBITMQ_PORT=5672
+      - RABBITMQ_USER=user
+      - RABBITMQ_PASS=password
+    networks:
+      - taller_net
+
+  productor-go:
+    build: ../Productores/productor-go
+    container_name: productor-go
+    environment:
+      - RABBIT_HOST=10.6.101.161
+      - RABBITMQ_PORT=5672
+      - RABBITMQ_USER=user
+      - RABBITMQ_PASS=password
+    networks:
+      - taller_net
+  consumidor-python:
+    build: ../Consumidores/consumidor-python
+    container_name: consumidor-python
+    environment:
+      - RABBIT_HOST=10.6.101.161
+      - RABBITMQ_PORT=5672
+      - RABBITMQ_USER=user
+      - RABBITMQ_PASS=password
+    networks:
+      - taller_net
+
+  consumidor-node:
+    build: ../Consumidores/consumidor-node
+    container_name: consumidor-node
+    environment:
+      - RABBIT_HOST=10.6.101.161
+      - RABBITMQ_PORT=5672
+      - RABBITMQ_USER=user
+      - RABBITMQ_PASS=password
+    networks:
+      - taller_net
+
+  consumidor-go:
+    build: ../Consumidores/consumidor-go
+    container_name: consumidor-go
+    environment:
+      - RABBIT_HOST=10.6.101.161
+      - RABBITMQ_PORT=5672
+      - RABBITMQ_USER=user
+      - RABBITMQ_PASS=password
+    networks:
+      - taller_net
+
+networks:
+  taller_net:
+    driver: bridge
