@@ -4,7 +4,7 @@ services:
     build: ../Productores/productor-python
     container_name: productor-python
     environment:
-      - RABBITMQ_HOST=192.168.0.103
+      - RABBITMQ_HOST=10.6.101.161
     networks:
       - taller_net
 
@@ -12,7 +12,7 @@ services:
     build: ../Consumidores/consumidor-python
     container_name: consumidor-python
     environment:
-      - RABBITMQ_HOST=192.168.0.103
+      - RABBITMQ_HOST=10.6.101.161
     networks:
       - taller_net
 

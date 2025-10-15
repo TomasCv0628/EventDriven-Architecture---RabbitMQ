@@ -4,7 +4,7 @@ services:
     build: ../Productores/productor-node
     container_name: productor-node
     environment:
-      - RABBITMQ_HOST=192.168.0.103
+      - RABBITMQ_HOST=10.6.101.161
     networks:
       - taller_net
 
@@ -12,7 +12,7 @@ services:
     build: ../Consumidores/consumidor-node
     container_name: consumidor-node
     environment:
-      - RABBITMQ_HOST=192.168.0.103
+      - RABBITMQ_HOST=10.6.101.161
     networks:
       - taller_net
 
@@ -20,7 +20,7 @@ services:
     build: ../Productores/productor-Go
     container_name: productor-go
     environment:
-      - RABBITMQ_HOST=192.168.0.103
+      - RABBITMQ_HOST=10.6.101.161
     networks:
       - taller_net
 
@@ -28,7 +28,7 @@ services:
     build: ../Consumidores/consumidor-Go
     container_name: consumidor-go
     environment:
-      - RABBITMQ_HOST=192.168.0.103
+      - RABBITMQ_HOST=10.6.101.161
     networks:
       - taller_net
 
