@@ -1,10 +1,14 @@
 version: '3.8'
+
 services:
-  productor-node:
-    build: ../Productores/productor-node
-    container_name: productor-node
+  consumidor-python:
+    build: ../Consumidores/consumidor-python
+    container_name: consumidor-python
     environment:
       - RABBITMQ_HOST=10.6.101.161
+      - RABBITMQ_PORT=5672
+      - RABBITMQ_USER=guest
+      - RABBITMQ_PASS=guest
     networks:
       - taller_net
 
@@ -13,22 +17,20 @@ services:
     container_name: consumidor-node
     environment:
       - RABBITMQ_HOST=10.6.101.161
-    networks:
-      - taller_net
-
-  productor-go:
-    build: ../Productores/productor-Go
-    container_name: productor-go
-    environment:
-      - RABBITMQ_HOST=10.6.101.161
+      - RABBITMQ_PORT=5672
+      - RABBITMQ_USER=guest
+      - RABBITMQ_PASS=guest
     networks:
       - taller_net
 
   consumidor-go:
-    build: ../Consumidores/consumidor-Go
+    build: ../Consumidores/consumidor-go
     container_name: consumidor-go
     environment:
       - RABBITMQ_HOST=10.6.101.161
+      - RABBITMQ_PORT=5672
+      - RABBITMQ_USER=guest
+      - RABBITMQ_PASS=guest
     networks:
       - taller_net
 
