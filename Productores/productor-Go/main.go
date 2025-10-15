@@ -16,7 +16,7 @@ func failOnError(err error, msg string) {
 func main() {
   rabbit := os.Getenv("RABBIT_HOST")
   if rabbit=="" { rabbit = "rabbitmq" }
-  conn, err := amqp.Dial("amqp://user:pass@" + rabbit + ":5672/")
+  conn, err := amqp.Dial("amqp://user:password@" + rabbit + ":5672/")
   failOnError(err, "Failed to connect")
   defer conn.Close()
   ch, err := conn.Channel()

@@ -1,6 +1,6 @@
 const amqp = require('amqplib');
 const RABBIT = process.env.RABBIT_HOST || 'rabbitmq';
-const URL = `amqp://user:pass@${RABBIT}`;
+const URL = `amqp://user:password@${RABBIT}`;
 
 (async () => {
   const conn = await amqp.connect(URL);

@@ -1,7 +1,7 @@
 # producer.py
 import pika, json, time, os, socket
 RABBIT = os.getenv("RABBIT_HOST", "rabbitmq")
-CREDENTIALS = pika.PlainCredentials('user','pass')
+CREDENTIALS = pika.PlainCredentials('user','password')
 params = pika.ConnectionParameters(host=RABBIT, credentials=CREDENTIALS)
 
 def main():
