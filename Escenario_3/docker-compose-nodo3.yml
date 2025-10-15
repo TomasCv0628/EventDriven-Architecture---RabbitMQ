@@ -9,7 +9,7 @@ services:
       - "15672:15672"   # Interfaz web de administración
     environment:
       RABBITMQ_DEFAULT_USER: user
-      RABBITMQ_DEFAULT_PASS: user
+      RABBITMQ_DEFAULT_PASS: password
     networks:
       - taller_net
 

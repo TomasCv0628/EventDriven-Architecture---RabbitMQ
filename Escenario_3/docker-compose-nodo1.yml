@@ -8,7 +8,7 @@ services:
       - RABBITMQ_HOST=10.6.101.161
       - RABBITMQ_PORT=5672
       - RABBITMQ_USER=user
-      - RABBITMQ_PASS=user
+      - RABBITMQ_PASS=password
     networks:
       - taller_net
 
@@ -19,7 +19,7 @@ services:
       - RABBITMQ_HOST=10.6.101.161
       - RABBITMQ_PORT=5672
       - RABBITMQ_USER=user
-      - RABBITMQ_PASS=user
+      - RABBITMQ_PASS=password
     networks:
       - taller_net
 
@@ -30,7 +30,7 @@ services:
       - RABBITMQ_HOST=10.6.101.161
       - RABBITMQ_PORT=5672
       - RABBITMQ_USER=user
-      - RABBITMQ_PASS=user
+      - RABBITMQ_PASS=password
     networks:
       - taller_net
 
