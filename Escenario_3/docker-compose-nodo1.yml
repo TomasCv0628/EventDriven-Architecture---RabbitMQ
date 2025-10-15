@@ -5,7 +5,7 @@ services:
     build: ../Productores/productor-python
     container_name: productor-python
     environment:
-      - RABBITMQ_HOST=10.6.101.161
+      - RABBIT_HOST=10.6.101.161
       - RABBITMQ_PORT=5672
       - RABBITMQ_USER=user
       - RABBITMQ_PASS=password
@@ -16,7 +16,7 @@ services:
     build: ../Productores/productor-node
     container_name: productor-node
     environment:
-      - RABBITMQ_HOST=10.6.101.161
+      - RABBIT_HOST=10.6.101.161
       - RABBITMQ_PORT=5672
       - RABBITMQ_USER=user
       - RABBITMQ_PASS=password
@@ -27,7 +27,7 @@ services:
     build: ../Productores/productor-go
     container_name: productor-go
     environment:
-      - RABBITMQ_HOST=10.6.101.161
+      - RABBIT_HOST=10.6.101.161
       - RABBITMQ_PORT=5672
       - RABBITMQ_USER=user
       - RABBITMQ_PASS=password

@@ -5,7 +5,7 @@ services:
     build: ../Consumidores/consumidor-python
     container_name: consumidor-python
     environment:
-      - RABBITMQ_HOST=10.6.101.161
+      - RABBIT_HOST=10.6.101.161
       - RABBITMQ_PORT=5672
       - RABBITMQ_USER=user
       - RABBITMQ_PASS=password
@@ -16,7 +16,7 @@ services:
     build: ../Consumidores/consumidor-node
     container_name: consumidor-node
     environment:
-      - RABBITMQ_HOST=10.6.101.161
+      - RABBIT_HOST=10.6.101.161
       - RABBITMQ_PORT=5672
       - RABBITMQ_USER=user
       - RABBITMQ_PASS=password
@@ -27,7 +27,7 @@ services:
     build: ../Consumidores/consumidor-go
     container_name: consumidor-go
     environment:
-      - RABBITMQ_HOST=10.6.101.161
+      - RABBIT_HOST=10.6.101.161
       - RABBITMQ_PORT=5672
       - RABBITMQ_USER=user
       - RABBITMQ_PASS=password
