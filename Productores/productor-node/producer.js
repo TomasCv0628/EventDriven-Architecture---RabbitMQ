@@ -1,19 +1,33 @@
 // producer.js
 const amqp = require('amqplib');
+const os = require('os');
+
 const RABBIT = process.env.RABBIT_HOST || 'rabbitmq';
-const URL = `amqp://user:pass@${RABBIT}`;
+const URL = `amqp://user:password@${RABBIT}`;
+const QUEUE = 'eventos';
 
-(async () => {
-  const conn = await amqp.connect(URL);
-  const ch = await conn.createChannel();
-  await ch.assertQueue('eventos', { durable: true });
+async function main() {
+  while (true) {
+    try {
+      console.log("[*] Intentando conectar a RabbitMQ...");
+      const conn = await amqp.connect(URL);
+      const ch = await conn.createChannel();
+      await ch.assertQueue(QUEUE, { durable: true });
+      console.log("[✓] Conectado a RabbitMQ. Enviando mensajes...");
 
-  for (let i=1; i<=20; i++){
-    const msg = { producer: 'node', seq: i, host: require('os').hostname() };
-    ch.sendToQueue('eventos', Buffer.from(JSON.stringify(msg)), { persistent:true });
-    console.log(' [x] Sent', msg);
-    await new Promise(r => setTimeout(r, 500));
+      let i = 0;
+      while (true) {
+        i++;
+        const msg = { producer: "node", host: os.hostname(), seq: i };
+        ch.sendToQueue(QUEUE, Buffer.from(JSON.stringify(msg)), { persistent: true });
+        console.log(" [x] Enviado:", msg);
+        await new Promise(r => setTimeout(r, 2000));
+      }
+    } catch (err) {
+      console.log("[!] RabbitMQ no está listo o se perdió la conexión. Reintentando en 5 segundos...");
+      await new Promise(r => setTimeout(r, 5000));
+    }
   }
-  await ch.close();
-  await conn.close();
-})();
+}
+
+main();

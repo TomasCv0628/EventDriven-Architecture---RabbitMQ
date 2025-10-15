@@ -1,5 +1,5 @@
 FROM python:3.10-slim
 WORKDIR /app
-COPY producer.py .
+COPY consumer.py .
 RUN pip install pika
 CMD ["python", "consumer.py"]

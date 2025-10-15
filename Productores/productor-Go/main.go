@@ -1,37 +1,54 @@
 package main
+
 import (
-  "github.com/streadway/amqp"
-  "log"
-  "os"
-  "time"
-  "encoding/json"
+	"encoding/json"
+	"fmt"
+	"log"
+	"os"
+	"time"
+
+	"github.com/streadway/amqp"
 )
 
-func failOnError(err error, msg string) {
-  if err != nil {
-    log.Fatalf("%s: %s", msg, err)
-  }
-}
-
 func main() {
-  rabbit := os.Getenv("RABBIT_HOST")
-  if rabbit=="" { rabbit = "rabbitmq" }
-  conn, err := amqp.Dial("amqp://user:pass@" + rabbit + ":5672/")
-  failOnError(err, "Failed to connect")
-  defer conn.Close()
-  ch, err := conn.Channel()
-  failOnError(err, "Failed to open channel")
-  defer ch.Close()
-  _, err = ch.QueueDeclare("eventos", true, false, false, false, nil)
-  failOnError(err, "Queue Declare failed")
-  for i:=1; i<=20; i++ {
-    body, _ := json.Marshal(map[string]interface{}{"producer":"go","seq":i})
-    err = ch.Publish("", "eventos", false, false, amqp.Publishing{
-      DeliveryMode: amqp.Persistent,
-      ContentType: "application/json",
-      Body: body,
-    })
-    log.Printf(" [x] Sent %s", body)
-    time.Sleep(500 * time.Millisecond)
-  }
+	rabbit := os.Getenv("RABBIT_HOST")
+	if rabbit == "" {
+		rabbit = "rabbitmq"
+	}
+
+	for {
+		conn, err := amqp.Dial(fmt.Sprintf("amqp://user:password@%s:5672/", rabbit))
+		if err != nil {
+			log.Println("RabbitMQ no está listo. Reintentando en 5 segundos...")
+			time.Sleep(5 * time.Second)
+			continue
+		}
+		ch, _ := conn.Channel()
+		ch.QueueDeclare("eventos", true, false, false, false, nil)
+		log.Println("[✓] Conectado a RabbitMQ. Enviando mensajes...")
+
+		i := 0
+		for {
+			i++
+			body, _ := json.Marshal(map[string]interface{}{
+				"producer": "go",
+				"seq":      i,
+			})
+			err = ch.Publish("", "eventos", false, false, amqp.Publishing{
+				DeliveryMode: amqp.Persistent,
+				ContentType:  "application/json",
+				Body:         body,
+			})
+			if err != nil {
+				log.Println("Error al enviar mensaje:", err)
+				break
+			}
+			log.Printf(" [x] Enviado %s", string(body))
+			time.Sleep(2 * time.Second)
+		}
+
+		ch.Close()
+		conn.Close()
+		time.Sleep(5 * time.Second)
+	}
 }
