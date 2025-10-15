@@ -7,8 +7,8 @@ services:
     environment:
       - RABBITMQ_HOST=10.6.101.161
       - RABBITMQ_PORT=5672
-      - RABBITMQ_USER=guest
-      - RABBITMQ_PASS=guest
+      - RABBITMQ_USER=user
+      - RABBITMQ_PASS=user
     networks:
       - taller_net
 
@@ -18,8 +18,8 @@ services:
     environment:
       - RABBITMQ_HOST=10.6.101.161
       - RABBITMQ_PORT=5672
-      - RABBITMQ_USER=guest
-      - RABBITMQ_PASS=guest
+      - RABBITMQ_USER=user
+      - RABBITMQ_PASS=user
     networks:
       - taller_net
 
@@ -29,8 +29,8 @@ services:
     environment:
       - RABBITMQ_HOST=10.6.101.161
       - RABBITMQ_PORT=5672
-      - RABBITMQ_USER=guest
-      - RABBITMQ_PASS=guest
+      - RABBITMQ_USER=user
+      - RABBITMQ_PASS=user
     networks:
       - taller_net
 
