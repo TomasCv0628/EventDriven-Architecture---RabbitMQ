@@ -11,7 +11,7 @@ services:
       - RABBITMQ_USER=user
       - RABBITMQ_PASS=password
     networks:
-      - taller_net
+      - taller_net2
 
   productor-go:
     build: ../Productores/productor-go
@@ -22,7 +22,7 @@ services:
       - RABBITMQ_USER=user
       - RABBITMQ_PASS=password
     networks:
-      - taller_net
+      - taller_net2
 
   consumidor-python-2:
     build: ../Consumidores/consumidor-python
@@ -33,7 +33,7 @@ services:
       - RABBITMQ_USER=user
       - RABBITMQ_PASS=password
     networks:
-      - taller_net
+      - taller_net2
 
   consumidor-go:
     build: ../Consumidores/consumidor-go
@@ -44,7 +44,7 @@ services:
       - RABBITMQ_USER=user
       - RABBITMQ_PASS=password
     networks:
-      - taller_net
+      - taller_net2
 
 networks:
   taller_net:
