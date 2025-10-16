@@ -47,5 +47,5 @@ services:
       - taller_net2
 
 networks:
-  taller_net:
+  taller_net2:
     driver: bridge
