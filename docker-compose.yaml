@@ -18,6 +18,13 @@ services:
     depends_on:
       - rabbitmq
 
+  producer_python_2:
+    build: ./Productores/productor-python
+    environment:
+      - RABBITMQ_HOST=rabbitmq
+    depends_on:
+      - rabbitmq
+
   producer_go:
     build: ./Productores/productor-Go
     environment:
@@ -40,6 +47,13 @@ services:
     depends_on:
       - rabbitmq
 
+  consumer_python_2:
+    build: ./Consumidores/consumidor-python
+    environment:
+      - RABBITMQ_HOST=rabbitmq
+    depends_on:
+      - rabbitmq
+  
   consumer_go:
     build: ./Consumidores/consumidor-Go
     environment:

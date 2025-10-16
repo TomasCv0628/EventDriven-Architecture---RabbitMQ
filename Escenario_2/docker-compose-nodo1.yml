@@ -12,6 +12,17 @@ services:
     networks:
       - taller_net
 
+  productor-python-2:
+    build: ../Productores/productor-python
+    container_name: productor-python-2
+    environment:
+      - RABBIT_HOST=10.6.101.161
+      - RABBITMQ_PORT=5672
+      - RABBITMQ_USER=user
+      - RABBITMQ_PASS=password
+    networks:
+      - taller_net
+
   productor-node:
     build: ../Productores/productor-node
     container_name: productor-node
@@ -33,9 +44,21 @@ services:
       - RABBITMQ_PASS=password
     networks:
       - taller_net
+
   consumidor-python:
     build: ../Consumidores/consumidor-python
     container_name: consumidor-python
+    environment:
+      - RABBIT_HOST=10.6.101.161
+      - RABBITMQ_PORT=5672
+      - RABBITMQ_USER=user
+      - RABBITMQ_PASS=password
+    networks:
+      - taller_net
+
+  consumidor-python-2:
+    build: ../Consumidores/consumidor-python
+    container_name: consumidor-python-2
     environment:
       - RABBIT_HOST=10.6.101.161
       - RABBITMQ_PORT=5672
